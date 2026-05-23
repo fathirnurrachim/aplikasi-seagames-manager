@@ -4,8 +4,20 @@ import (
 	"fmt"
 )
 
-func SequentialSearch() {
-	fmt.Println("TEST!!! untuk fungsi SequentialSearch()")
+func SequentialSearch(data Data, nData, idCari int) int {
+	var index, i int
+
+	index = -1
+
+	i = 0
+	for i < nData && index == -1 {
+		if data[i].id == idCari {
+			index = i
+		}
+	}
+	i++
+
+	return index
 }
 
 func BinarySearch() {
