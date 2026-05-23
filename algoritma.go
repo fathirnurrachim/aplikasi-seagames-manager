@@ -20,8 +20,26 @@ func SequentialSearch(data Data, nData, idCari int) int {
 	return index
 }
 
-func BinarySearch() {
-	fmt.Println("TEST!!! untuk fungsi BinarySearch()")
+func BinarySearch(data Data, nData, idCari int) int {
+	var index, left, right, mid int
+
+	index = -1
+	left = 0
+	right = nData - 1
+
+	for left <= right && index == -1 {
+		mid = (left + right) / 2
+
+		if data[mid].id == idCari {
+			index = mid
+		} else if data[mid].id < idCari {
+			left = mid + 1
+		} else {
+			right = mid - 1
+		}
+	}
+
+	return index
 }
 
 func SelectionSort() {
