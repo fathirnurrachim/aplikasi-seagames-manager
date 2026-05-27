@@ -1,108 +1,126 @@
 package main
 
 import (
-	"bufio"
 	"fmt"
-	"os"
 	"strings"
 )
 
-type Negara struct {
-	Nama string
-	Kode string
+// Data negara
+var negara = map[string]string{
+	"INA": "Indonesia",
+	"MAS": "Malaysia",
+	"SGP": "Singapura",
+	"THA": "Thailand",
+	"PHI": "Filipina",
 }
-
-var daftarNegara []Negara
-var sc = bufio.NewScanner(os.Stdin)
 
 func kelolaNegara() {
 	for {
-		fmt.Println("\n1. Tambah Negara")
-		fmt.Println("2. Edit Negara")
-		fmt.Println("3. Hapus Negara")
-		fmt.Println("4. Kembali")
-		fmt.Print("Pilih: ")
-
+		fmt.Println("\n========== MENU NEGARA ==========")
+		fmt.Println("1. Tambah negara")
+		fmt.Println("2. Edit negara")
+		fmt.Println("3. Hapus negara")
+		fmt.Println("4. Lihat semua negara")
+		fmt.Println("5. Kembali")
+		fmt.Print("Pilih menu (1-5): ")
+		
 		var pilih int
 		fmt.Scanln(&pilih)
-		sc.Scan()
-
-		if pilih == 4 {
+		
+		if pilih == 5 {
+			fmt.Println("Kembali ke menu utama...")
 			break
 		}
-
-		switch pilih {
-		case 1:
-			fmt.Print("Nama Negara: ")
-			nama := bacaString()
-			fmt.Print("Kode Negara: ")
-			kode := bacaString()
-
-			ada := false
-			for _, n := range daftarNegara {
-				if n.Kode == kode {
-					ada = true
-					break
+		
+		// Menu lihat semua negara
+		if pilih == 4 {
+			fmt.Println("\n========== DATA SEMUA NEGARA ==========")
+			if len(negara) == 0 {
+				fmt.Println("Belum ada data negara nih!")
+			} else {
+				for kode, nama := range negara {
+					fmt.Printf("%s: %s\n", kode, nama)
 				}
 			}
-
+			continue
+		}
+		
+		// Untuk tambah, edit, dan hapus
+		if pilih == 1 {
+			// Tambah negara
+			fmt.Print("Masukkan kode negara (3 huruf): ")
+			var kode string
+			fmt.Scanln(&kode)
+			kode = strings.ToUpper(kode)
+			
+			// Cek apakah kode sudah ada
+			_, ada := negara[kode]
+			if ada {
+				fmt.Println("Kode negara udah ada!")
+				continue
+			}
+			
+			fmt.Print("Masukkan nama negara: ")
+			var nama string
+			fmt.Scanln(&nama)
+			
+			negara[kode] = nama
+			fmt.Printf("Berhasil tambah negara %s (%s)\n", nama, kode)
+			
+		} else if pilih == 2 {
+			// Edit negara
+			fmt.Print("Masukkan kode negara yang mau diedit: ")
+			var kode string
+			fmt.Scanln(&kode)
+			kode = strings.ToUpper(kode)
+			
+			// Cek apakah negara ada
+			namaLama, ada := negara[kode]
 			if !ada {
-				daftarNegara = append(daftarNegara, Negara{nama, kode})
-				fmt.Println("Berhasil ditambahkan")
-			} else {
-				fmt.Println("Kode sudah ada")
+				fmt.Println("Negara gak ketemu!")
+				continue
 			}
-
-		case 2:
-			fmt.Print("Kode negara yang diedit: ")
-			kode := bacaString()
-
-			ketemu := -1
-			for i, n := range daftarNegara {
-				if n.Kode == kode {
-					ketemu = i
-					break
-				}
+			
+			fmt.Printf("Nama lama: %s\n", namaLama)
+			fmt.Print("Masukkan nama baru: ")
+			var namaBaru string
+			fmt.Scanln(&namaBaru)
+			
+			negara[kode] = namaBaru
+			fmt.Printf("Berhasil update negara %s jadi %s\n", kode, namaBaru)
+			
+		} else if pilih == 3 {
+			// Hapus negara
+			fmt.Print("Masukkan kode negara yang mau dihapus: ")
+			var kode string
+			fmt.Scanln(&kode)
+			kode = strings.ToUpper(kode)
+			
+			// Cek apakah negara ada
+			nama, ada := negara[kode]
+			if !ada {
+				fmt.Println("Negara gak ketemu!")
+				continue
 			}
-
-			if ketemu != -1 {
-				fmt.Print("Nama baru: ")
-				daftarNegara[ketemu].Nama = bacaString()
-				fmt.Println("Berhasil diupdate")
-			} else {
-				fmt.Println("Negara tidak ditemukan")
-			}
-
-		case 3:
-			fmt.Print("Kode negara yang dihapus: ")
-			kode := bacaString()
-
-			ketemu := -1
-			for i, n := range daftarNegara {
-				if n.Kode == kode {
-					ketemu = i
-					break
-				}
-			}
-
-			if ketemu != -1 {
-				daftarNegara = append(daftarNegara[:ketemu], daftarNegara[ketemu+1:]...)
-				fmt.Println("Berhasil dihapus")
-			} else {
-				fmt.Println("Negara tidak ditemukan")
-			}
-
-		default:
-			fmt.Println("Pilihan salah")
+			
+			delete(negara, kode)
+			fmt.Printf("Berhasil hapus negara %s (%s)\n", nama, kode)
+			
+		} else {
+			fmt.Println("Pilihan gak ada! Coba 1-5")
+			continue
+		}
+		
+		// Tampilkan data terbaru agar keliatan
+		fmt.Println("\nData terbaru:")
+		for kode, nama := range negara {
+			fmt.Printf("%s: %s\n", kode, nama)
 		}
 	}
 }
 
-func bacaString() string {
-	sc.Scan()
-	return strings.TrimSpace(sc.Text())
-}
-
 func main() {
+	fmt.Println("=== PROGRAM DATA NEGARA ===")
+	fmt.Println("Selamat datang! Yuk atur data negara")
 	kelolaNegara()
 }
