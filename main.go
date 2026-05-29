@@ -37,14 +37,21 @@ func SubmenuKelolaNegara() {
 	fmt.Println("                  SUBMENU KELOLA NEGARA                  ")
 	fmt.Println("---------------------------------------------------------")
 	fmt.Println("1. Tambah Negara")
-	fmt.Println("2. Tambah Medali")
-	fmt.Println("3. Tampilkan Ranking")
+	fmt.Println("2. Edit Negara")
+	fmt.Println("3. Hapus Negara")
 	fmt.Println("4. Keluar")
 	fmt.Println("---------------------------------------------------------")
 }
 
 func SubmenuKelolaMedali() {
-	fmt.Println("TEST!!! untuk fungsi SubmenuKelolaMedali()")
+	fmt.Println("---------------------------------------------------------")
+	fmt.Println("                  SUBMENU KELOLA MEDALI                  ")
+	fmt.Println("---------------------------------------------------------")
+	fmt.Println("1. Tambah Medali")
+	fmt.Println("2. Edit Medali")
+	fmt.Println("3. Hapus Medali")
+	fmt.Println("4. Keluar")
+	fmt.Println("---------------------------------------------------------")
 }
 
 func TampilkanRanking() {
