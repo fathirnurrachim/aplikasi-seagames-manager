@@ -22,7 +22,14 @@ func main() {
 }
 
 func Menu() {
-	fmt.Println("TEST!!! untuk fungsi Menu()")
+	fmt.Println("------------------------------")
+	fmt.Println("             MENU             ")
+	fmt.Println("------------------------------")
+	fmt.Println("1. Kelola Negara")
+	fmt.Println("2. Kelola Medali")
+	fmt.Println("3. Tampilkan Ranking")
+	fmt.Println("4. Keluar")
+	fmt.Println("------------------------------")
 }
 
 func SubmenuKelolaNegara() {
