@@ -55,7 +55,7 @@ func main() {
 			}
 
 		case 3:
-			TampilkanRanking()
+			TampilkanRanking(data, nData)
 		}
 
 		if pilih == 4 {
@@ -97,6 +97,15 @@ func SubmenuKelolaMedali() {
 	fmt.Println("---------------------------------------------------------")
 }
 
-func TampilkanRanking() {
-	fmt.Println("TEST!!! untuk fungsi TampilkanRanking()")
+func TampilkanRanking(data Data, nData int) {
+
+	SelectionSort(data, nData)
+
+	fmt.Printf("%-5s %-25s %-10s %-10s %-10s\n",
+		"ID", "Nama Negara", "Emas", "Perak", "Perunggu")
+
+	for i := 0; i < nData; i++ {
+		fmt.Printf("%-5d %-25s %-10d %-10d %-10d\n",
+			data[i].id, data[i].nama, data[i].medali.emas, data[i].medali.perak, data[i].medali.perunggu)
+	}
 }
