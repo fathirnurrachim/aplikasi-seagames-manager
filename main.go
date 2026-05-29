@@ -5,20 +5,63 @@ import (
 )
 
 func main() {
-	fmt.Println("TEST!!! untuk fungsi main()")
+	var data Data
+	var nData, pilih, pilihSubmenu int
 
-	Menu()
-	SubmenuKelolaNegara()
-	SubmenuKelolaMedali()
-	TampilkanRanking()
+	for {
+		Menu()
+		fmt.Println("Pilih (1/2/3/4)?")
+		fmt.Scan(&pilih)
 
-	KelolaNegara()
-	KelolaMedali()
+		switch pilih {
+		case 1:
+			for {
+				SubmenuKelolaNegara()
+				fmt.Println("Pilih (1/2/3/4)?")
+				fmt.Scan(&pilihSubmenu)
 
-	SequentialSearch()
-	BinarySearch()
-	SelectionSort()
-	InsertionSort()
+				switch pilihSubmenu {
+				case 1:
+					TambahNegara(data, nData)
+				case 2:
+					EditNegara(data, nData)
+				case 3:
+					HapusNegara(data, nData)
+				}
+
+				if pilihSubmenu == 4 {
+					return
+				}
+			}
+
+		case 2:
+			for {
+				SubmenuKelolaMedali()
+				fmt.Println("Pilih (1/2/3/4)?")
+				fmt.Scan(&pilihSubmenu)
+
+				switch pilihSubmenu {
+				case 1:
+					TambahMedali(data, nData)
+				case 2:
+					EditMedali(data, nData)
+				case 3:
+					HapusMedali(data, nData)
+				}
+
+				if pilihSubmenu == 4 {
+					return
+				}
+			}
+
+		case 3:
+			TampilkanRanking()
+		}
+
+		if pilih == 4 {
+			return
+		}
+	}
 }
 
 func Menu() {
