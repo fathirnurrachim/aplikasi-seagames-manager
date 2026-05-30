@@ -4,6 +4,6 @@ import (
 	"fmt"
 )
 
-func KelolaNegara() {
+func kelolaNegara() {
 	fmt.Println("TEST!!! untuk fungsi KelolaNegara()")
 }
