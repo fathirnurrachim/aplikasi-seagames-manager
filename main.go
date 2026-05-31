@@ -99,7 +99,7 @@ func SubmenuKelolaMedali() {
 
 func TampilkanRanking(data Data, nData int) {
 
-	SelectionSort(data, nData)
+	SelectionSortDesc(data, nData)
 
 	fmt.Printf("%-5s %-25s %-10s %-10s %-10s\n",
 		"ID", "Nama Negara", "Emas", "Perak", "Perunggu")
