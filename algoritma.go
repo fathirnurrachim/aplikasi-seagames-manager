@@ -42,8 +42,37 @@ func BinarySearch(data Data, nData, idCari int) int {
 	return index
 }
 
-func SelectionSort() {
-	fmt.Println("TEST!!! untuk fungsi SelectionSort()")
+func SelectionSortDesc(data Data, nData int) {
+	var pass, index, i int
+	var temp Negara
+
+	pass = 1
+	for pass < nData-1 {
+
+		index = pass - 1
+
+		i = pass
+		for i < nData {
+			if data[i].medali.emas > data[index].medali.emas {
+				index = i
+			} else if data[i].medali.emas == data[index].medali.emas {
+				if data[i].medali.perak > data[index].medali.perak {
+					index = i
+				} else if data[i].medali.perak == data[index].medali.perak {
+					if data[i].medali.perunggu > data[index].medali.perunggu {
+						index = i
+					}
+				}
+			}
+		}
+		i++
+	}
+
+	temp = data[pass-1]
+	data[pass-1] = data[index]
+	data[index] = temp
+
+	pass++
 }
 
 func InsertionSort() {
