@@ -1,9 +1,5 @@
 package main
 
-import (
-	"fmt"
-)
-
 func SequentialSearch(data Data, nData, idCari int) int {
 	var index, i int
 
@@ -14,8 +10,9 @@ func SequentialSearch(data Data, nData, idCari int) int {
 		if data[i].id == idCari {
 			index = i
 		}
+
+		i++
 	}
-	i++
 
 	return index
 }
@@ -26,6 +23,8 @@ func BinarySearch(data Data, nData, idCari int) int {
 	index = -1
 	left = 0
 	right = nData - 1
+
+	InsertionSortAsc(data, nData)
 
 	for left <= right && index == -1 {
 		mid = (left + right) / 2
@@ -40,6 +39,26 @@ func BinarySearch(data Data, nData, idCari int) int {
 	}
 
 	return index
+}
+
+func InsertionSortAsc(data Data, nData int) {
+	var pass, i int
+	var temp Negara
+
+	pass = 1
+	for pass < nData {
+		temp = data[pass]
+
+		i = pass
+		for i > 0 && temp.id < data[i-1].id {
+			data[i] = data[i-1]
+			i--
+		}
+
+		data[i] = temp
+
+		pass++
+	}
 }
 
 func SelectionSortDesc(data Data, nData int) {
@@ -64,17 +83,14 @@ func SelectionSortDesc(data Data, nData int) {
 					}
 				}
 			}
+
+			i++
 		}
-		i++
+
+		temp = data[pass-1]
+		data[pass-1] = data[index]
+		data[index] = temp
+
+		pass++
 	}
-
-	temp = data[pass-1]
-	data[pass-1] = data[index]
-	data[index] = temp
-
-	pass++
-}
-
-func InsertionSort() {
-	fmt.Println("TEST!!! untuk fungsi InsertionSort()")
 }
