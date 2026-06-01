@@ -34,6 +34,31 @@ func TampilkanDataNegara(data Data, nData int) {
 	}
 }
 
+func TambahNegara(data *Data, nData *int, idBaru int, namaBaru string) {
+	var index int
+
+	index = SequentialSearch(*data, *nData, idBaru)
+
+	if index == -1 {
+		if *nData < NMAX {
+			(*data)[*nData].id = idBaru
+			(*data)[*nData].nama = namaBaru
+
+			(*data)[*nData].medali.emas = 0
+			(*data)[*nData].medali.perak = 0
+			(*data)[*nData].medali.perunggu = 0
+
+			*nData++
+
+			fmt.Println("Negara Berhasil Ditambahkan!")
+		} else {
+			*nData = NMAX
+		}
+	} else {
+		fmt.Println("Negara Sudah Ada!")
+	}
+}
+
 // // Data negara
 // var negara = map[string]string{
 // 	"INA": "Indonesia",
