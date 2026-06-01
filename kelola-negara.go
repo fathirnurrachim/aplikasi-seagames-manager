@@ -23,6 +23,17 @@ func BacaDataNegara(data *Data, nData *int) {
 	}
 }
 
+func TampilkanDataNegara(data Data, nData int) {
+
+	fmt.Printf("%-5s %-25s %-10s %-10s %-10s\n",
+		"ID", "Nama Negara", "Emas", "Perak", "Perunggu")
+
+	for i := 0; i < nData; i++ {
+		fmt.Printf("%-5d %-25s %-10d %-10d %-10d\n",
+			data[i].id, data[i].nama, data[i].medali.emas, data[i].medali.perak, data[i].medali.perunggu)
+	}
+}
+
 // // Data negara
 // var negara = map[string]string{
 // 	"INA": "Indonesia",
