@@ -8,17 +8,17 @@ import (
 func BacaDataNegara(data *Data, nData *int) {
 
 	fmt.Print("Masukkan Banyaknya Negara: ")
-	fmt.Scan(&nData)
+	fmt.Scan(nData)
 
 	if *nData > NMAX {
 		*nData = NMAX
 	}
 
 	for i := 0; i < *nData; i++ {
-		fmt.Print("Masukkan ID Negara: ")
+		fmt.Print("Masukkan ID: ")
 		fmt.Scan(&data[i].id)
 
-		fmt.Print("Masukkan Nama Negara: ")
+		fmt.Print("Masukkan Nama: ")
 		fmt.Scan(&data[i].nama)
 	}
 }
