@@ -40,20 +40,16 @@ func TambahNegara(data *Data, nData *int, idBaru int, namaBaru string) {
 	index = SequentialSearch(*data, *nData, idBaru)
 
 	if index == -1 {
-		if *nData < NMAX {
-			(*data)[*nData].id = idBaru
-			(*data)[*nData].nama = namaBaru
+		(*data)[*nData].id = idBaru
+		(*data)[*nData].nama = namaBaru
 
-			(*data)[*nData].medali.emas = 0
-			(*data)[*nData].medali.perak = 0
-			(*data)[*nData].medali.perunggu = 0
+		(*data)[*nData].medali.emas = 0
+		(*data)[*nData].medali.perak = 0
+		(*data)[*nData].medali.perunggu = 0
 
-			*nData++
+		*nData++
 
-			fmt.Println("Negara Berhasil Ditambahkan!")
-		} else {
-			*nData = NMAX
-		}
+		fmt.Println("Negara Berhasil Ditambahkan!")
 	} else {
 		fmt.Println("Negara Sudah Ada!")
 	}
