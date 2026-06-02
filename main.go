@@ -7,59 +7,70 @@ import (
 func main() {
 	var data Data
 	var nData, pilih, pilihSubmenu int
+	var idCari, idBaru int
+	var namaBaru string
 
 	for {
 		Menu()
-		fmt.Println("Pilih (1/2/3/4)?")
+		fmt.Print("Pilih (1/2/3/4)? ")
 		fmt.Scan(&pilih)
 
 		switch pilih {
 		case 1:
 			for {
 				SubmenuKelolaNegara()
-				fmt.Println("Pilih (1/2/3/4)?")
+				fmt.Print("Pilih (1/2/3/4)? ")
 				fmt.Scan(&pilihSubmenu)
 
 				switch pilihSubmenu {
 				case 1:
-					TambahNegara(data, nData)
+					fmt.Print("Masukkan Jumlah Negara: ")
+					fmt.Scan(&nData)
+
+					BacaNegara(&data, &nData)
+
+					TambahNegara(&data, &nData, idBaru, namaBaru)
+
+					TampilkanNegara(data, nData)
 				case 2:
-					EditNegara(data, nData)
+					// EditNegara(data, nData)
 				case 3:
-					HapusNegara(data, nData)
+					// HapusNegara(data, nData)
 				}
 
 				if pilihSubmenu == 4 {
-					return
+					break
 				}
 			}
 
 		case 2:
 			for {
 				SubmenuKelolaMedali()
-				fmt.Println("Pilih (1/2/3/4)?")
+				fmt.Print("Pilih (1/2/3/4)? ")
 				fmt.Scan(&pilihSubmenu)
 
 				switch pilihSubmenu {
 				case 1:
-					TambahMedali(data, nData)
+					// TambahMedali(data, nData)
 				case 2:
-					EditMedali(data, nData)
+					// EditMedali(data, nData)
 				case 3:
-					HapusMedali(data, nData)
+					// HapusMedali(data, nData)
 				}
 
 				if pilihSubmenu == 4 {
-					return
+					break
 				}
 			}
 
 		case 3:
-			TampilkanRanking(data, nData)
+			SelectionSortDesc(data, nData)
+
+			TampilkanNegara(data, nData)
 		}
 
 		if pilih == 4 {
-			return
+			break
 		}
 	}
 }
@@ -97,15 +108,15 @@ func SubmenuKelolaMedali() {
 	fmt.Println("---------------------------------------------------------")
 }
 
-func TampilkanRanking(data Data, nData int) {
+// func TampilkanRanking(data Data, nData int) {
 
-	SelectionSortDesc(data, nData)
+// 	SelectionSortDesc(data, nData)
 
-	fmt.Printf("%-5s %-25s %-10s %-10s %-10s\n",
-		"ID", "Nama Negara", "Emas", "Perak", "Perunggu")
+// 	fmt.Printf("%-5s %-25s %-10s %-10s %-10s\n",
+// 		"ID", "Nama Negara", "Emas", "Perak", "Perunggu")
 
-	for i := 0; i < nData; i++ {
-		fmt.Printf("%-5d %-25s %-10d %-10d %-10d\n",
-			data[i].id, data[i].nama, data[i].medali.emas, data[i].medali.perak, data[i].medali.perunggu)
-	}
-}
+// 	for i := 0; i < nData; i++ {
+// 		fmt.Printf("%-5d %-25s %-10d %-10d %-10d\n",
+// 			data[i].id, data[i].nama, data[i].medali.emas, data[i].medali.perak, data[i].medali.perunggu)
+// 	}
+// }
