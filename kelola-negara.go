@@ -5,10 +5,7 @@ import (
 	// "strings"
 )
 
-func BacaDataNegara(data *Data, nData *int) {
-
-	fmt.Print("Masukkan Banyaknya Negara: ")
-	fmt.Scan(nData)
+func BacaNegara(data *Data, nData *int) {
 
 	if *nData > NMAX {
 		*nData = NMAX
@@ -23,7 +20,7 @@ func BacaDataNegara(data *Data, nData *int) {
 	}
 }
 
-func TampilkanDataNegara(data Data, nData int) {
+func TampilkanNegara(data Data, nData int) {
 
 	fmt.Printf("%-5s %-25s %-10s %-10s %-10s\n",
 		"ID", "Nama Negara", "Emas", "Perak", "Perunggu")
@@ -52,6 +49,19 @@ func TambahNegara(data *Data, nData *int, idBaru int, namaBaru string) {
 		fmt.Println("Negara Berhasil Ditambahkan!")
 	} else {
 		fmt.Println("Negara Sudah Ada!")
+	}
+}
+
+func EditNegara(data *Data, nData int, idCari int, namaBaru string) {
+	var index int
+
+	index = SequentialSearch(*data, nData, idCari)
+
+	if index != -1 {
+		data[index].nama = namaBaru
+		fmt.Println("Negara Berhasil Diedit!")
+	} else {
+		fmt.Println("Negara yang Ingin Diedit Tidak Ditemukan!")
 	}
 }
 
