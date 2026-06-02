@@ -33,9 +33,9 @@ func main() {
 
 					TampilkanNegara(data, nData)
 				case 2:
-					// EditNegara(data, nData)
+					EditNegara(&data, nData, idCari, namaBaru)
 				case 3:
-					// HapusNegara(data, nData)
+					HapusNegara(&data, &nData, idCari)
 				}
 
 				if pilihSubmenu == 4 {
