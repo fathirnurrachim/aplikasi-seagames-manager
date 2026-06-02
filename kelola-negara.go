@@ -65,6 +65,22 @@ func EditNegara(data *Data, nData int, idCari int, namaBaru string) {
 	}
 }
 
+func HapusNegara(data *Data, nData *int, idCari int) {
+	var index int
+
+	index = BinarySearch(*data, *nData, idCari)
+
+	if index != -1 {
+		for i := index; i < *nData-1; i++ {
+			data[i] = data[i+1]
+			fmt.Println("Negara Berhasil Dihapus!")
+		}
+		*nData--
+	} else {
+		fmt.Println("Negara yang Ingin Dihapus Tidak Ditemukan!")
+	}
+}
+
 // // Data negara
 // var negara = map[string]string{
 // 	"INA": "Indonesia",
