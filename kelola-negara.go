@@ -5,7 +5,13 @@ import (
 	// "strings"
 )
 
-func BacaNegara(data *Data, nData *int) {
+func TambahNegara(data *Data, nData *int) {
+	var index, idBaru int
+	var namaBaru string
+
+	fmt.Print("Masukkan Jumlah Negara: ")
+	fmt.Scan(nData)
+	fmt.Println()
 
 	if *nData > NMAX {
 		*nData = NMAX
@@ -13,10 +19,77 @@ func BacaNegara(data *Data, nData *int) {
 
 	for i := 0; i < *nData; i++ {
 		fmt.Print("Masukkan ID: ")
-		fmt.Scan(&data[i].id)
+		fmt.Scan(&idBaru)
 
 		fmt.Print("Masukkan Nama: ")
-		fmt.Scan(&data[i].nama)
+		fmt.Scan(&namaBaru)
+		fmt.Println()
+
+		index = SequentialSearch(*data, i, idBaru)
+
+		if index == -1 {
+			data[i].id = idBaru
+			data[i].nama = namaBaru
+
+			data[i].medali.emas = 0
+			data[i].medali.perak = 0
+			data[i].medali.perunggu = 0
+
+			fmt.Println("NEGARA BERHASIL DITAMBAHKAN!")
+			fmt.Println()
+		} else {
+			fmt.Println("NEGARA TIDAK BERHASIL DITAMBAHKAN!")
+			fmt.Println()
+		}
+	}
+}
+
+func EditNegara(data *Data, nData int) {
+	var index, idCari int
+	var namaBaru string
+
+	fmt.Print("Masukkan ID: ")
+	fmt.Scan(&idCari)
+	fmt.Println()
+
+	index = SequentialSearch(*data, nData, idCari)
+
+	if index != -1 {
+		fmt.Print("Masukkan Nama Baru: ")
+		fmt.Scan(&namaBaru)
+		fmt.Println()
+
+		data[index].nama = namaBaru
+
+		fmt.Println("NEGARA BERHASIL DIEDIT!")
+		fmt.Println()
+	} else {
+		fmt.Println("NEGARA TIDAK BERHASIL DIEDIT!")
+		fmt.Println()
+	}
+}
+
+func HapusNegara(data *Data, nData *int) {
+	var index, idCari int
+
+	fmt.Print("Masukkan ID: ")
+	fmt.Scan(&idCari)
+	fmt.Println()
+
+	index = BinarySearch(*data, *nData, idCari)
+
+	if index != -1 {
+		for i := index; i < *nData-1; i++ {
+			data[i] = data[i+1]
+		}
+
+		*nData--
+
+		fmt.Println("NEGARA BERHASIL DIHAPUS!")
+		fmt.Println()
+	} else {
+		fmt.Println("NEGARA TIDAK BERHASIL DIHAPUS!")
+		fmt.Println()
 	}
 }
 
@@ -29,56 +102,8 @@ func TampilkanNegara(data Data, nData int) {
 		fmt.Printf("%-5d %-25s %-10d %-10d %-10d\n",
 			data[i].id, data[i].nama, data[i].medali.emas, data[i].medali.perak, data[i].medali.perunggu)
 	}
-}
 
-func TambahNegara(data *Data, nData *int, idBaru int, namaBaru string) {
-	var index int
-
-	index = SequentialSearch(*data, *nData, idBaru)
-
-	if index == -1 {
-		(*data)[*nData].id = idBaru
-		(*data)[*nData].nama = namaBaru
-
-		(*data)[*nData].medali.emas = 0
-		(*data)[*nData].medali.perak = 0
-		(*data)[*nData].medali.perunggu = 0
-
-		*nData++
-
-		fmt.Println("Negara Berhasil Ditambahkan!")
-	} else {
-		fmt.Println("Negara Sudah Ada!")
-	}
-}
-
-func EditNegara(data *Data, nData int, idCari int, namaBaru string) {
-	var index int
-
-	index = SequentialSearch(*data, nData, idCari)
-
-	if index != -1 {
-		data[index].nama = namaBaru
-		fmt.Println("Negara Berhasil Diedit!")
-	} else {
-		fmt.Println("Negara yang Ingin Diedit Tidak Ditemukan!")
-	}
-}
-
-func HapusNegara(data *Data, nData *int, idCari int) {
-	var index int
-
-	index = BinarySearch(*data, *nData, idCari)
-
-	if index != -1 {
-		for i := index; i < *nData-1; i++ {
-			data[i] = data[i+1]
-			fmt.Println("Negara Berhasil Dihapus!")
-		}
-		*nData--
-	} else {
-		fmt.Println("Negara yang Ingin Dihapus Tidak Ditemukan!")
-	}
+	fmt.Println()
 }
 
 // // Data negara
