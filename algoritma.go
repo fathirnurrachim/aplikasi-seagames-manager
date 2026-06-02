@@ -24,8 +24,6 @@ func BinarySearch(data Data, nData, idCari int) int {
 	left = 0
 	right = nData - 1
 
-	InsertionSortAsc(data, nData)
-
 	for left <= right && index == -1 {
 		mid = (left + right) / 2
 
@@ -41,7 +39,7 @@ func BinarySearch(data Data, nData, idCari int) int {
 	return index
 }
 
-func InsertionSortAsc(data Data, nData int) {
+func InsertionSortAsc(data *Data, nData int) {
 	var pass, i int
 	var temp Negara
 
@@ -61,7 +59,7 @@ func InsertionSortAsc(data Data, nData int) {
 	}
 }
 
-func SelectionSortDesc(data Data, nData int) {
+func SelectionSortDesc(data *Data, nData int) {
 	var pass, index, i int
 	var temp Negara
 
