@@ -6,39 +6,41 @@ import (
 )
 
 func TambahNegara(data *Data, nData *int) {
-	var index, idBaru int
+	var index, jumlah, idBaru int
 	var namaBaru string
 
 	fmt.Print("Masukkan Jumlah Negara: ")
-	fmt.Scan(nData)
+	fmt.Scan(&jumlah)
 	fmt.Println()
 
-	if *nData > NMAX {
-		*nData = NMAX
+	if jumlah > NMAX {
+		jumlah = NMAX
 	}
 
-	for i := 0; i < *nData; i++ {
-		fmt.Print("Masukkan ID: ")
+	for i := 0; i < jumlah; i++ {
+		fmt.Print("ID Negara Baru: ")
 		fmt.Scan(&idBaru)
 
-		fmt.Print("Masukkan Nama: ")
+		fmt.Print("Nama Negara Baru: ")
 		fmt.Scan(&namaBaru)
 		fmt.Println()
 
-		index = SequentialSearch(*data, i, idBaru)
+		index = SequentialSearch(*data, *nData, idBaru)
 
 		if index == -1 {
-			data[i].id = idBaru
-			data[i].nama = namaBaru
+			data[*nData].id = idBaru
+			data[*nData].nama = namaBaru
 
-			data[i].medali.emas = 0
-			data[i].medali.perak = 0
-			data[i].medali.perunggu = 0
+			data[*nData].medali.emas = 0
+			data[*nData].medali.perak = 0
+			data[*nData].medali.perunggu = 0
+
+			*nData++
 
 			fmt.Println("NEGARA BERHASIL DITAMBAHKAN!")
 			fmt.Println()
 		} else {
-			fmt.Println("NEGARA TIDAK BERHASIL DITAMBAHKAN!")
+			fmt.Println("NEGARA SUDAH ADA!")
 			fmt.Println()
 		}
 	}
@@ -48,14 +50,14 @@ func EditNegara(data *Data, nData int) {
 	var index, idCari int
 	var namaBaru string
 
-	fmt.Print("Masukkan ID: ")
+	fmt.Print("ID Negara Lama: ")
 	fmt.Scan(&idCari)
 	fmt.Println()
 
 	index = SequentialSearch(*data, nData, idCari)
 
 	if index != -1 {
-		fmt.Print("Masukkan Nama Baru: ")
+		fmt.Print("Nama Negara Baru: ")
 		fmt.Scan(&namaBaru)
 		fmt.Println()
 
@@ -64,7 +66,7 @@ func EditNegara(data *Data, nData int) {
 		fmt.Println("NEGARA BERHASIL DIEDIT!")
 		fmt.Println()
 	} else {
-		fmt.Println("NEGARA TIDAK BERHASIL DIEDIT!")
+		fmt.Println("NEGARA TIDAK DITEMUKAN")
 		fmt.Println()
 	}
 }
@@ -72,10 +74,11 @@ func EditNegara(data *Data, nData int) {
 func HapusNegara(data *Data, nData *int) {
 	var index, idCari int
 
-	fmt.Print("Masukkan ID: ")
+	fmt.Print("ID Negara Lama: ")
 	fmt.Scan(&idCari)
 	fmt.Println()
 
+	InsertionSortAsc(*data, *nData)
 	index = BinarySearch(*data, *nData, idCari)
 
 	if index != -1 {
@@ -88,7 +91,7 @@ func HapusNegara(data *Data, nData *int) {
 		fmt.Println("NEGARA BERHASIL DIHAPUS!")
 		fmt.Println()
 	} else {
-		fmt.Println("NEGARA TIDAK BERHASIL DIHAPUS!")
+		fmt.Println("NEGARA TIDAK DITEMUKAN!")
 		fmt.Println()
 	}
 }
