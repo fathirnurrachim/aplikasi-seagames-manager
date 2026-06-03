@@ -31,6 +31,7 @@ func main() {
 					EditNegara(&data, nData)
 					TampilkanNegara(data, nData)
 				case 3:
+					InsertionSortAsc(&data, nData)
 					TampilkanNegara(data, nData)
 					HapusNegara(&data, &nData)
 					TampilkanNegara(data, nData)
