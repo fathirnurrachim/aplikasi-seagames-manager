@@ -2,7 +2,6 @@ package main
 
 import (
 	"fmt"
-	// "strings"
 )
 
 func TambahNegara(data *Data, nData *int) {
@@ -52,7 +51,6 @@ func EditNegara(data *Data, nData int) {
 
 	fmt.Print("ID Negara Lama: ")
 	fmt.Scan(&idCari)
-	fmt.Println()
 
 	index = SequentialSearch(*data, nData, idCari)
 
