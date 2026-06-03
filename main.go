@@ -7,13 +7,12 @@ import (
 func main() {
 	var data Data
 	var nData, pilih, pilihSubmenu int
-	var idCari, idBaru int
-	var namaBaru string
 
 	for {
 		Menu()
 		fmt.Print("Pilih (1/2/3/4)? ")
 		fmt.Scan(&pilih)
+		fmt.Println()
 
 		switch pilih {
 		case 1:
@@ -21,21 +20,20 @@ func main() {
 				SubmenuKelolaNegara()
 				fmt.Print("Pilih (1/2/3/4)? ")
 				fmt.Scan(&pilihSubmenu)
+				fmt.Println()
 
 				switch pilihSubmenu {
 				case 1:
-					fmt.Print("Masukkan Jumlah Negara: ")
-					fmt.Scan(&nData)
-
-					BacaNegara(&data, &nData)
-
-					TambahNegara(&data, &nData, idBaru, namaBaru)
-
+					TambahNegara(&data, &nData)
 					TampilkanNegara(data, nData)
 				case 2:
-					EditNegara(&data, nData, idCari, namaBaru)
+					TampilkanNegara(data, nData)
+					EditNegara(&data, nData)
+					TampilkanNegara(data, nData)
 				case 3:
-					HapusNegara(&data, &nData, idCari)
+					TampilkanNegara(data, nData)
+					HapusNegara(&data, &nData)
+					TampilkanNegara(data, nData)
 				}
 
 				if pilihSubmenu == 4 {
@@ -48,6 +46,7 @@ func main() {
 				SubmenuKelolaMedali()
 				fmt.Print("Pilih (1/2/3/4)? ")
 				fmt.Scan(&pilihSubmenu)
+				fmt.Println()
 
 				switch pilihSubmenu {
 				case 1:
@@ -64,8 +63,7 @@ func main() {
 			}
 
 		case 3:
-			SelectionSortDesc(data, nData)
-
+			SelectionSortDesc(&data, nData)
 			TampilkanNegara(data, nData)
 		}
 
@@ -107,16 +105,3 @@ func SubmenuKelolaMedali() {
 	fmt.Println("4. Keluar")
 	fmt.Println("---------------------------------------------------------")
 }
-
-// func TampilkanRanking(data Data, nData int) {
-
-// 	SelectionSortDesc(data, nData)
-
-// 	fmt.Printf("%-5s %-25s %-10s %-10s %-10s\n",
-// 		"ID", "Nama Negara", "Emas", "Perak", "Perunggu")
-
-// 	for i := 0; i < nData; i++ {
-// 		fmt.Printf("%-5d %-25s %-10d %-10d %-10d\n",
-// 			data[i].id, data[i].nama, data[i].medali.emas, data[i].medali.perak, data[i].medali.perunggu)
-// 	}
-// }
