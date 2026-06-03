@@ -78,7 +78,6 @@ func HapusNegara(data *Data, nData *int) {
 	fmt.Scan(&idCari)
 	fmt.Println()
 
-	InsertionSortAsc(data, *nData)
 	index = BinarySearch(*data, *nData, idCari)
 
 	if index != -1 {
