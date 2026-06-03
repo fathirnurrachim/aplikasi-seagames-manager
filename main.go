@@ -31,7 +31,6 @@ func main() {
 					EditNegara(&data, nData)
 					TampilkanNegara(data, nData)
 				case 3:
-					InsertionSortAsc(&data, nData)
 					TampilkanNegara(data, nData)
 					HapusNegara(&data, &nData)
 					TampilkanNegara(data, nData)
@@ -106,16 +105,3 @@ func SubmenuKelolaMedali() {
 	fmt.Println("4. Keluar")
 	fmt.Println("---------------------------------------------------------")
 }
-
-// func TampilkanRanking(data Data, nData int) {
-
-// 	fmt.Printf("%-5s %-25s %-10s %-10s %-10s\n",
-// 		"ID", "Nama Negara", "Emas", "Perak", "Perunggu")
-
-// 	for i := 0; i < nData; i++ {
-// 		fmt.Printf("%-5d %-25s %-10d %-10d %-10d\n",
-// 			data[i].id, data[i].nama, data[i].medali.emas, data[i].medali.perak, data[i].medali.perunggu)
-// 	}
-
-// 	fmt.Println()
-// }
