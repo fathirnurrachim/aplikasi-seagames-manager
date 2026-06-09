@@ -1,13 +1,13 @@
 package main
 
-func SequentialSearch(data Data, nData, idCari int) int {
+func SequentialSearch(data Data, nData int, namaCari string) int {
 	var index, i int
 
 	index = -1
 
 	i = 0
 	for i < nData && index == -1 {
-		if data[i].id == idCari {
+		if data[i].nama == namaCari {
 			index = i
 		}
 
@@ -17,7 +17,7 @@ func SequentialSearch(data Data, nData, idCari int) int {
 	return index
 }
 
-func BinarySearch(data Data, nData, idCari int) int {
+func BinarySearch(data Data, nData int, namaCari string) int {
 	var index, left, right, mid int
 
 	index = -1
@@ -27,9 +27,9 @@ func BinarySearch(data Data, nData, idCari int) int {
 	for left <= right && index == -1 {
 		mid = (left + right) / 2
 
-		if data[mid].id == idCari {
+		if data[mid].nama == namaCari {
 			index = mid
-		} else if data[mid].id < idCari {
+		} else if data[mid].nama < namaCari {
 			left = mid + 1
 		} else {
 			right = mid - 1
