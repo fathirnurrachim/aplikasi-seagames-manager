@@ -3,7 +3,7 @@ package main
 const NMAX int = 10
 
 type Negara struct {
-	id     int
+	// id     int
 	nama   string
 	medali Medali
 }
