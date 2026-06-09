@@ -1,82 +1,96 @@
 package main
 
-import (
-	"fmt"
-	"strings"
-)
+import "fmt"
 
-var negara = map[string]map[string]int{
-	"INA": {"emas": 0, "perak": 0, "perunggu": 0},
-	"MAS": {"emas": 0, "perak": 0, "perunggu": 0},
-	"SGP": {"emas": 0, "perak": 0, "perunggu": 0},
+func TambahMedali(data *Data, nData int) {
+	var nama, jenis string
+	var jumlah, index int
+
+	fmt.Print("Nama Negara: ")
+	fmt.Scan(&nama)
+
+	index = SequentialSearch(*data, nData, nama)
+
+	if index != -1 {
+
+		fmt.Print("Jenis medali (emas/perak/perunggu): ")
+		fmt.Scan(&jenis)
+
+		fmt.Print("Jumlah: ")
+		fmt.Scan(&jumlah)
+
+		if jenis == "emas" {
+			(*data)[index].medali.emas += jumlah
+		} else if jenis == "perak" {
+			(*data)[index].medali.perak += jumlah
+		} else if jenis == "perunggu" {
+			(*data)[index].medali.perunggu += jumlah
+		}
+
+		fmt.Println("Medali berhasil ditambah")
+
+	} else {
+		fmt.Println("Negara tidak ditemukan")
+	}
 }
 
-func KelolaMedali() {
-	var pilih int
-	selesai := false
+func EditMedali(data *Data, nData int) {
+	var nama, jenis string
+	var jumlahBaru, index int
 
-	for !selesai {
-		fmt.Println("\n========== MENU MEDALI ==========")
-		fmt.Println("1. Tambah Medali")
-		fmt.Println("2. Edit Medali")
-		fmt.Println("3. Hapus Medali")
-		fmt.Println("4. Kembali")
-		fmt.Print("Pilih Menu: ")
+	fmt.Print("Nama Negara: ")
+	fmt.Scan(&nama)
 
-		fmt.Scanln(&pilih)
+	index = SequentialSearch(*data, nData, nama)
 
-		if pilih == 4 {
-			selesai = true
-		} else if pilih >= 1 && pilih <= 3 {
-			var kode string
-			fmt.Print("Masukkan Kode Negara (INA/MAS/SGP): ")
-			fmt.Scanln(&kode)
+	if index != -1 {
 
-			kode = strings.ToUpper(kode)
+		fmt.Print("Jenis medali (emas/perak/perunggu): ")
+		fmt.Scan(&jenis)
 
-			if _, ada := negara[kode]; ada {
-				var jenis string
-				fmt.Print("Jenis Medali (emas/perak/perunggu): ")
-				fmt.Scanln(&jenis)
+		fmt.Print("Jumlah baru: ")
+		fmt.Scan(&jumlahBaru)
 
-				jenis = strings.ToLower(jenis)
-
-				if jenis == "emas" || jenis == "perak" || jenis == "perunggu" {
-					if pilih == 1 {
-						var jumlah int
-						fmt.Print("Jumlah Medali: ")
-						fmt.Scanln(&jumlah)
-
-						negara[kode][jenis] += jumlah
-						fmt.Println("Medali berhasil ditambahkan")
-
-					} else if pilih == 2 {
-						var jumlahBaru int
-						fmt.Print("Jumlah Baru: ")
-						fmt.Scanln(&jumlahBaru)
-
-						negara[kode][jenis] = jumlahBaru
-						fmt.Println("Medali berhasil diupdate")
-
-					} else if pilih == 3 {
-						negara[kode][jenis] = 0
-						fmt.Println("Medali berhasil dihapus")
-					}
-
-					fmt.Printf("\n%s -> Emas:%d Perak:%d Perunggu:%d\n",
-						kode,
-						negara[kode]["emas"],
-						negara[kode]["perak"],
-						negara[kode]["perunggu"])
-
-				} else {
-					fmt.Println("Jenis medali tidak valid")
-				}
-			} else {
-				fmt.Println("Negara tidak ditemukan")
-			}
-		} else {
-			fmt.Println("Menu tidak valid! Silakan pilih 1-4.")
+		if jenis == "emas" {
+			(*data)[index].medali.emas = jumlahBaru
+		} else if jenis == "perak" {
+			(*data)[index].medali.perak = jumlahBaru
+		} else if jenis == "perunggu" {
+			(*data)[index].medali.perunggu = jumlahBaru
 		}
+
+		fmt.Println("Medali berhasil diedit")
+
+	} else {
+		fmt.Println("Negara tidak ditemukan")
+	}
+}
+
+func HapusMedali(data *Data, nData int) {
+	var nama, jenis string
+	var index int
+
+	fmt.Print("Nama Negara: ")
+	fmt.Scan(&nama)
+
+	idx = BinarySearch(*data, nData, nama)
+
+	if index != -1 {
+
+		fmt.Print("Jenis medali (emas/perak/perunggu): ")
+		fmt.Scan(&jenis)
+
+		if jenis == "emas" {
+			(*data)[index].medali.emas = 0
+		} else if jenis == "perak" {
+			(*data)[index].medali.perak = 0
+		} else if jenis == "perunggu" {
+			(*data)[index].medali.perunggu = 0
+		}
+
+		fmt.Println("Medali berhasil dihapus")
+
+	} else {
+		fmt.Println("Negara tidak ditemukan")
 	}
 }

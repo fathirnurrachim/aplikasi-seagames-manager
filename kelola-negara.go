@@ -19,6 +19,7 @@ func BacaNegara(data *Data, nData *int) {
 func TambahNegara(data *Data, nData *int) {
 	var jumlah int
 	var namaBaru string
+	var i int
 
 	fmt.Print("Masukkan Jumlah Negara: ")
 	fmt.Scan(&jumlah)
@@ -27,97 +28,77 @@ func TambahNegara(data *Data, nData *int) {
 		jumlah = NMAX - *nData
 	}
 
-	for i := 0; i < jumlah; i++ {
+	i = 0
+	for i < jumlah {
+
 		fmt.Print("Nama Negara Baru: ")
 		fmt.Scan(&namaBaru)
 
-		ada := false
+		if SequentialSearch(*data, *nData, namaBaru) == -1 {
 
-		for j := 0; j < *nData; j++ {
-			if (*data)[j].nama == namaBaru {
-				ada = true
-				break
-			}
-		}
+			(*data)[*nData].id = *nData + 1
+			(*data)[*nData].nama = namaBaru
 
-		if ada {
+			(*data)[*nData].medali.emas = 0
+			(*data)[*nData].medali.perak = 0
+			(*data)[*nData].medali.perunggu = 0
+
+			*nData = *nData + 1
+
+			fmt.Println("NEGARA BERHASIL DITAMBAHKAN!")
+		} else {
 			fmt.Println("NEGARA SUDAH ADA!")
-			continue
 		}
 
-		(*data)[*nData].id = *nData + 1
-		(*data)[*nData].nama = namaBaru
-
-		(*data)[*nData].medali.emas = 0
-		(*data)[*nData].medali.perak = 0
-		(*data)[*nData].medali.perunggu = 0
-
-		*nData++
-
-		fmt.Println("NEGARA BERHASIL DITAMBAHKAN!")
+		i = i + 1
 	}
 }
 
 func EditNegara(data *Data, nData int) {
 	var namaLama, namaBaru string
+	var i, index int
 
 	fmt.Print("Nama Negara Lama: ")
 	fmt.Scan(&namaLama)
 
-	for i := 0; i < nData; i++ {
-		if (*data)[i].nama == namaLama {
-			fmt.Print("Nama Negara Baru: ")
-			fmt.Scan(&namaBaru)
+	index = SequentialSearch(*data, nData, namaLama)
 
-			(*data)[i].nama = namaBaru
+	if index != -1 {
 
-			fmt.Println("NEGARA BERHASIL DIEDIT!")
-			return
-		}
+		fmt.Print("Nama Negara Baru: ")
+		fmt.Scan(&namaBaru)
+
+		(*data)[index].nama = namaBaru
+
+		fmt.Println("NEGARA BERHASIL DIEDIT!")
+	} else {
+		fmt.Println("NEGARA TIDAK DITEMUKAN!")
 	}
 
-	fmt.Println("NEGARA TIDAK DITEMUKAN!")
+	i = i
 }
 
 func HapusNegara(data *Data, nData *int) {
 	var namaCari string
+	var i, index int
 
 	fmt.Print("Nama Negara: ")
 	fmt.Scan(&namaCari)
 
-	index := -1
+	idx = BinarySearch(*data, *nData, namaCari)
 
-	for i := 0; i < *nData; i++ {
-		if (*data)[i].nama == namaCari {
-			index = i
-			break
+	if index != -1 {
+
+		i = index
+		for i < *nData-1 {
+			(*data)[i] = (*data)[i+1]
+			i = i + 1
 		}
-	}
 
-	if index == -1 {
+		*nData = *nData - 1
+
+		fmt.Println("NEGARA BERHASIL DIHAPUS!")
+	} else {
 		fmt.Println("NEGARA TIDAK DITEMUKAN!")
-		return
-	}
-
-	for i := index; i < *nData-1; i++ {
-		(*data)[i] = (*data)[i+1]
-	}
-
-	*nData--
-
-	fmt.Println("NEGARA BERHASIL DIHAPUS!")
-}
-
-func TampilkanNegara(data Data, nData int) {
-	fmt.Printf("%-5s %-25s %-10s %-10s %-10s\n",
-		"ID", "Nama Negara", "Emas", "Perak", "Perunggu")
-
-	for i := 0; i < nData; i++ {
-		fmt.Printf("%-5d %-25s %-10d %-10d %-10d\n",
-			data[i].id,
-			data[i].nama,
-			data[i].medali.emas,
-			data[i].medali.perak,
-			data[i].medali.perunggu)
 	}
 }
