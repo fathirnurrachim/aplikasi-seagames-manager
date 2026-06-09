@@ -56,7 +56,7 @@ func TambahNegara(data *Data, nData *int) {
 
 func EditNegara(data *Data, nData int) {
 	var namaLama, namaBaru string
-	var i, index int
+	var index int
 
 	fmt.Print("Nama Negara Lama: ")
 	fmt.Scan(&namaLama)
@@ -74,8 +74,6 @@ func EditNegara(data *Data, nData int) {
 	} else {
 		fmt.Println("NEGARA TIDAK DITEMUKAN!")
 	}
-
-	i = i
 }
 
 func HapusNegara(data *Data, nData *int) {
@@ -85,7 +83,7 @@ func HapusNegara(data *Data, nData *int) {
 	fmt.Print("Nama Negara: ")
 	fmt.Scan(&namaCari)
 
-	idx = BinarySearch(*data, *nData, namaCari)
+	index = BinarySearch(*data, *nData, namaCari)
 
 	if index != -1 {
 
@@ -100,5 +98,19 @@ func HapusNegara(data *Data, nData *int) {
 		fmt.Println("NEGARA BERHASIL DIHAPUS!")
 	} else {
 		fmt.Println("NEGARA TIDAK DITEMUKAN!")
+	}
+}
+
+func TampilkanNegara(data Data, nData int) {
+	fmt.Printf("%-5s %-25s %-10s %-10s %-10s\n",
+		"ID", "Nama Negara", "Emas", "Perak", "Perunggu")
+
+	for i := 0; i < nData; i++ {
+		fmt.Printf("%-5d %-25s %-10d %-10d %-10d\n",
+			data[i].id,
+			data[i].nama,
+			data[i].medali.emas,
+			data[i].medali.perak,
+			data[i].medali.perunggu)
 	}
 }

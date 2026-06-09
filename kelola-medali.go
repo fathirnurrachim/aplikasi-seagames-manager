@@ -73,7 +73,7 @@ func HapusMedali(data *Data, nData int) {
 	fmt.Print("Nama Negara: ")
 	fmt.Scan(&nama)
 
-	idx = BinarySearch(*data, nData, nama)
+	index = BinarySearch(*data, nData, nama)
 
 	if index != -1 {
 
