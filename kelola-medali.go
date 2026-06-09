@@ -1,89 +1,82 @@
 package main
 
-// import (
-// 	"fmt"
-// 	"strings"
-// )
+import (
+	"fmt"
+	"strings"
+)
 
-// // Data negara dan medalinya
-// var negara = map[string]map[string]int{
-// 	"INA": {"emas": 0, "perak": 0, "perunggu": 0},
-// 	"MAS": {"emas": 0, "perak": 0, "perunggu": 0},
-// 	"SGP": {"emas": 0, "perak": 0, "perunggu": 0},
-// }
+var negara = map[string]map[string]int{
+	"INA": {"emas": 0, "perak": 0, "perunggu": 0},
+	"MAS": {"emas": 0, "perak": 0, "perunggu": 0},
+	"SGP": {"emas": 0, "perak": 0, "perunggu": 0},
+}
 
-// func KelolaMedali() {
-// 	for {
-// 		fmt.Println("\n========== MENU MEDALI ==========")
-// 		fmt.Println("1. Tambah medali")
-// 		fmt.Println("2. Edit medali")
-// 		fmt.Println("3. Hapus medali")
-// 		fmt.Println("4. Kembali")
-// 		fmt.Print("Pilih menu (1-4): ")
+func KelolaMedali() {
+	var pilih int
+	selesai := false
 
-// 		var pilih int
-// 		fmt.Scanln(&pilih)
+	for !selesai {
+		fmt.Println("\n========== MENU MEDALI ==========")
+		fmt.Println("1. Tambah Medali")
+		fmt.Println("2. Edit Medali")
+		fmt.Println("3. Hapus Medali")
+		fmt.Println("4. Kembali")
+		fmt.Print("Pilih Menu: ")
 
-// 		if pilih == 4 {
-// 			fmt.Println("Kembali ke menu utama...")
-// 			break
-// 		}
+		fmt.Scanln(&pilih)
 
-// 		fmt.Print("Masukkan kode negara (INA/MAS/SGP): ")
-// 		var kode string
-// 		fmt.Scanln(&kode)
-// 		kode = strings.ToUpper(kode)
+		if pilih == 4 {
+			selesai = true
+		} else if pilih >= 1 && pilih <= 3 {
+			var kode string
+			fmt.Print("Masukkan Kode Negara (INA/MAS/SGP): ")
+			fmt.Scanln(&kode)
 
-// 		// Cek apakah negara ada
-// 		_, ada := negara[kode]
-// 		if !ada {
-// 			fmt.Println("Negara gak ketemu!")
-// 			continue
-// 		}
+			kode = strings.ToUpper(kode)
 
-// 		fmt.Print("Jenis medali (emas/perak/perunggu): ")
-// 		var jenis string
-// 		fmt.Scanln(&jenis)
-// 		jenis = strings.ToLower(jenis)
+			if _, ada := negara[kode]; ada {
+				var jenis string
+				fmt.Print("Jenis Medali (emas/perak/perunggu): ")
+				fmt.Scanln(&jenis)
 
-// 		// Cek apakah jenis medali valid
-// 		if jenis != "emas" && jenis != "perak" && jenis != "perunggu" {
-// 			fmt.Println("Jenis medali salah! Pilih emas/perak/perunggu")
-// 			continue
-// 		}
+				jenis = strings.ToLower(jenis)
 
-// 		if pilih == 1 {
-// 			// Tambah medali
-// 			fmt.Print("Jumlah yang mau ditambah: ")
-// 			var jumlah int
-// 			fmt.Scanln(&jumlah)
-// 			negara[kode][jenis] += jumlah
-// 			fmt.Printf("Berhasil tambah %d %s untuk %s\n", jumlah, jenis, kode)
+				if jenis == "emas" || jenis == "perak" || jenis == "perunggu" {
+					if pilih == 1 {
+						var jumlah int
+						fmt.Print("Jumlah Medali: ")
+						fmt.Scanln(&jumlah)
 
-// 		} else if pilih == 2 {
-// 			// Edit medali
-// 			fmt.Print("Jumlah baru: ")
-// 			var jumlahBaru int
-// 			fmt.Scanln(&jumlahBaru)
-// 			negara[kode][jenis] = jumlahBaru
-// 			fmt.Printf("Berhasil update %s untuk %s jadi %d\n", jenis, kode, jumlahBaru)
+						negara[kode][jenis] += jumlah
+						fmt.Println("Medali berhasil ditambahkan")
 
-// 		} else if pilih == 3 {
-// 			// Hapus medali
-// 			negara[kode][jenis] = 0
-// 			fmt.Printf("Berhasil hapus semua %s untuk %s\n", jenis, kode)
-// 		}
+					} else if pilih == 2 {
+						var jumlahBaru int
+						fmt.Print("Jumlah Baru: ")
+						fmt.Scanln(&jumlahBaru)
 
-// 		// Tampilkan data terbaru biar keliatan
-// 		fmt.Printf("\nData terbaru %s: Emas=%d, Perak=%d, Perunggu=%d\n",
-// 			kode,
-// 			negara[kode]["emas"],
-// 			negara[kode]["perak"],
-// 			negara[kode]["perunggu"])
-// 	}
-// }
+						negara[kode][jenis] = jumlahBaru
+						fmt.Println("Medali berhasil diupdate")
 
-// func main() {
-// 	fmt.Println("=== PROGRAM DATA MEDALI OLIMPIADE ===")
-// 	kelolaMedali()
-// }
+					} else if pilih == 3 {
+						negara[kode][jenis] = 0
+						fmt.Println("Medali berhasil dihapus")
+					}
+
+					fmt.Printf("\n%s -> Emas:%d Perak:%d Perunggu:%d\n",
+						kode,
+						negara[kode]["emas"],
+						negara[kode]["perak"],
+						negara[kode]["perunggu"])
+
+				} else {
+					fmt.Println("Jenis medali tidak valid")
+				}
+			} else {
+				fmt.Println("Negara tidak ditemukan")
+			}
+		} else {
+			fmt.Println("Menu tidak valid! Silakan pilih 1-4.")
+		}
+	}
+}
