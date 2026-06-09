@@ -1,13 +1,13 @@
 package main
 
-func SequentialSearch(data Data, nData, idCari int) int {
+func SequentialSearch(data Data, nData int, namaCari string) int {
 	var index, i int
 
 	index = -1
 
 	i = 0
 	for i < nData && index == -1 {
-		if data[i].id == idCari {
+		if data[i].nama == namaCari {
 			index = i
 		}
 
@@ -17,21 +17,19 @@ func SequentialSearch(data Data, nData, idCari int) int {
 	return index
 }
 
-func BinarySearch(data Data, nData, idCari int) int {
+func BinarySearch(data Data, nData int, namaCari string) int {
 	var index, left, right, mid int
 
 	index = -1
 	left = 0
 	right = nData - 1
 
-	InsertionSortAsc(data, nData)
-
 	for left <= right && index == -1 {
 		mid = (left + right) / 2
 
-		if data[mid].id == idCari {
+		if data[mid].nama == namaCari {
 			index = mid
-		} else if data[mid].id < idCari {
+		} else if data[mid].nama < namaCari {
 			left = mid + 1
 		} else {
 			right = mid - 1
@@ -41,7 +39,7 @@ func BinarySearch(data Data, nData, idCari int) int {
 	return index
 }
 
-func InsertionSortAsc(data Data, nData int) {
+func InsertionSortAsc(data *Data, nData int) {
 	var pass, i int
 	var temp Negara
 
@@ -61,7 +59,7 @@ func InsertionSortAsc(data Data, nData int) {
 	}
 }
 
-func SelectionSortDesc(data Data, nData int) {
+func SelectionSortDesc(data *Data, nData int) {
 	var pass, index, i int
 	var temp Negara
 
