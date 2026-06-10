@@ -48,7 +48,7 @@ func InsertionSortAsc(data *Data, nData int) {
 		temp = data[pass]
 
 		i = pass
-		for i > 0 && temp.id < data[i-1].id {
+		for i > 0 && temp.nama < data[i-1].nama {
 			data[i] = data[i-1]
 			i--
 		}
