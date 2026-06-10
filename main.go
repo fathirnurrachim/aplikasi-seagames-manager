@@ -51,18 +51,18 @@ func main() {
 
 				switch pilihSubmenu {
 				case 1:
-					TampilkanMedali(data, nData)
+					TampilkanNegara(data, nData)
 					TambahMedali(&data, nData)
-					TampilkanMedali(data, nData)
+					TampilkanNegara(data, nData)
 				case 2:
-					TampilkanMedali(data, nData)
+					TampilkanNegara(data, nData)
 					EditMedali(&data, nData)
-					TampilkanMedali(data, nData)
+					TampilkanNegara(data, nData)
 				case 3:
 					InsertionSortAsc(&data, nData)
-					TampilkanMedali(data, nData)
+					TampilkanNegara(data, nData)
 					HapusMedali(&data, nData)
-					TampilkanMedali(data, nData)
+					TampilkanNegara(data, nData)
 				}
 
 				if pilihSubmenu == 4 {
